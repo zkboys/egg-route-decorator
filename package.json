@@ -1,0 +1,75 @@
+{
+  "name": "egg-route-decorator",
+  "version": "2.0.0",
+  "description": "Define egg.js router and middleware use decorator",
+  "eggPlugin": {
+    "name": "routeDecorator"
+  },
+  "main": "./lib/index.js",
+  "keywords": [
+    "egg",
+    "eggPlugin",
+    "egg-plugin"
+  ],
+  "dependencies": {
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-register": "^6.26.0"
+  },
+  "devDependencies": {
+    "autod": "^3.1.0",
+    "autod-egg": "^1.1.0",
+    "egg": "^2.29.1",
+    "egg-bin": "^4.15.0",
+    "egg-ci": "^1.18.0",
+    "egg-mock": "^3.22.1",
+    "eslint": "^5.15.3",
+    "eslint-config-egg": "^7.2.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-html": "^4.0.5",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "eslint-plugin-vue": "^4.5.0",
+    "eslint-scope": "^4.0.3",
+    "prettier": "^1.19.1",
+    "snyk": "^1.420.1"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "scripts": {
+    "test": "npm run lint -- --fix && egg-bin pkgfiles && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "egg-bin pkgfiles --check && npm run lint && npm run cov",
+    "pkgfiles": "egg-bin pkgfiles",
+    "autod": "autod",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "files": [
+    "lib",
+    "config",
+    "app.js"
+  ],
+  "ci": {
+    "version": "8, 10"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fyl080801/egg-decorator-router.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fyl080801/egg-decorator-router/issues"
+  },
+  "homepage": "https://github.com/fyl080801/egg-decorator-router#readme",
+  "author": "fyl080801",
+  "license": "MIT",
+  "snyk": true
+}
