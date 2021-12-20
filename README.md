@@ -46,8 +46,8 @@
 ```js
 // config/plugin.js
 exports.routeDecorator = {
-  enable: true,
-  package: 'egg-route-decorator'
+    enable: true,
+    package: 'egg-route-decorator'
 }
 ```
 
@@ -69,75 +69,68 @@ exports.routeDecorator = {
 
 ```javascript
 exports.routeDecorator = {
-  prefix: '/api', // 全局统一前缀
-  // wrapperResult: false, // 是否包装结果，true使用默认，false关闭
-  wrapperResult: {
-    // 如下配置是默认值
-    success(data) {
-      // 函数有返回值，进行包装，如果没有返回值，不包装
-      if (data !== undefined) {
-        this.ctx.body = {
-          code: 10,
-          data
-        }
-      }
+    prefix: '/api', // 全局统一前缀
+    defaultMethod: 'get', // 默认请求方法
+    // wrapperResult: false, // 是否包装结果
+    wrapperResult: { // 如下配置是默认值
+        success(data, ctx) {
+            // 函数有返回值，进行包装，如果没有返回值，不包装
+            if (data !== undefined) {
+                ctx.body = {
+                    code: 10,
+                    data,
+                };
+            }
+        },
+        error(error, ctx) {
+            // 对错误信息进行包装
+            ctx.body = {
+                code: 19999,
+                error,
+                message: error && error.message,
+            };
+        },
     },
-    error(error) {
-      // 对错误信息进行包装
-      this.ctx.body = {
-        code: 19999,
-        error,
-        message: error && error.message
-      }
-    }
-  }
 }
 ```
+
+## API
+
+| 装饰器 | 级别 | 参数 | 说明 |
+| --- | --- | --- | --- |
+| route(prefix?) | class | prefix：所有当前类路由的统一前缀，默认空 | 当前controller类启用装饰器路由，没有使用装饰器的方法，会默认处理为路由，规则：`post /prefix/methodName` |
+| middleware(middleware, index) | class 或 method | middleware：中间件函数；index：中间件顺序 | class级别给所有的方法添加中间件，method级别给当前方法添加中间件 |
+| get(path, name)、post、put、del、patch、all | method | path：路由地址；name：路由名称 | 给方法添加具体http方法的装饰器 |
+| routeIgnore | method | - | 标记当前方法不处理成路由 |
 
 ## 使用场景
 
 - 不用单独定义 router，直接在 controller 里通过装饰器自动生成 router
-- 支持在 controller 里通过装饰器方式加入中间件
+- 支持在 controller 里通过装饰器方式加入中间件，类级别以及方法级别
 
-## 规范
-
-Http 请求的完整路径是根路径和子路径合并的结果
-
-在 controller 中先引入依赖
-
-```javascript
-const {
-  route,
-  all,
-  get,
-  post,
-  put,
-  patch,
-  del,
-  middleware
-} = require('egg-route-decorator')
-```
-
-如果使用 typescript
+## 示例
 
 ```typescript
+import { Controller } from 'egg';
 import {
-  route,
-  all,
-  get,
-  post,
-  put,
-  patch,
-  del,
-  middleware
+    route,
+    all,
+    get,
+    post,
+    put,
+    patch,
+    del,
+    middleware,
+    routeIgnore
 } from 'egg-route-decorator'
-```
 
-### 直接在 controller 里定义一个路由
+const mi = name => (_ctx, next) => {
+    console.log('passed  middleware ' + name);
+    next();
+};
 
-在 controller 里定义一个根路径
+// controller类上启用装饰器路由
 
-```javascript
 // root path is '/'
 @route()
 
@@ -149,84 +142,52 @@ import {
 
 // root path is '/routename/action'
 @route('/routename/action')
-```
 
-支持定义参数
-
-```javascript
+// 支持定义参数
 @route('/routename/:name')
-```
+@middleware(mi('RoleController'))
+export default class RoleController extends Controller {
+    // sub-path is '/index'
+    public async index() {
+        // this.ctx.body = '123';
+        return {
+            name: 'role 张三',
+            age: 24,
+        };
+    }
 
-### 定义子目录和 HttpMethod
+    // sub-path is '/'
+    @get()
 
-支持 Http 方法 `get` `post` `put` `patch` `del` `all`
+    // sub-path is '/'
+    @get('/')
 
-在 controller 方法上定义子目录
+    // sub-path is '/roles'
+    @get('/roles')
 
-```javascript
-// sub-path is '/'
-@get()
+    // sub-path is '/roles/:id'
+    @get('/roles/:id')
+    public async getRoles() {
 
-// sub-path is '/'
-@get('/')
+        return {
+            name: 123,
+        }
+    }
 
-// sub-path is '/action'
-@get('/action')
+    // 没有使用装饰器，默认生成路由：/roles
+    @middleware(mi('roles'))
+    public async roles() {
+        throw Error('测试错误 role');
+    }
 
-// sub-path is '/action/:id'
-@get('/action/:id')
-```
+    @middleware(mi('delRoles'))
+    @routeIgnore // 忽略，不生成路由
+    public async delRoles() {
+        return '删除角色22';
+    }
 
-### 定义中间件
-
-```javascript
-@middleware(routeM)
-```
-
-## 示例
-
-```javascript
-'use strict'
-
-const { Controller } = require('egg')
-const { route, get, middleware, filters } = require('egg-route-decorator')
-const { DefaultFilter } = filters
-
-const routeM = (ctx, next) => {
-  console.log('passed route middleware')
-  next()
 }
 
-const actionM = i => {
-  return (ctx, next) => {
-    console.log('passed action middleware ' + i)
-    next()
-  }
-}
-
-@route()
-@middleware(routeM) class HomeController extends Controller {
-  @get('/') // path: /
-  async index() {
-    await new Promise(resolve => {
-      this.ctx.body = 'ssss'
-      resolve()
-    })
-  }
-
-  @get() // path: /func1
-  @middleware(actionM(2), 2)
-  @middleware(actionM(1), 1) func1(ctx) {
-    ctx.body = 'hi, func1'
-  }
-
-  @get('/:id') // path: /:id
-  @DefaultFilter('aaa') func2(ctx) {
-    ctx.body = 'hi, func2 ' + ctx.params.id
-  }
-}
-
-module.exports = HomeController
 ```
 
 ## License
