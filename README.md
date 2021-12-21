@@ -11,17 +11,17 @@
 
 [npm-url]: https://npmjs.org/package/egg-route-decorator
 
-[travis-image]: https://img.shields.io/travis/fyl080801/egg-route-decorator.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/zkboys/egg-route-decorator.svg?style=flat-square
 
-[travis-url]: https://travis-ci.org/fyl080801/egg-route-decorator.svg?branch=master
+[travis-url]: https://travis-ci.org/zkboys/egg-route-decorator.svg?branch=master
 
-[codecov-image]: https://img.shields.io/codecov/c/github/fyl080801/egg-route-decorator.svg?style=flat-square
+[codecov-image]: https://img.shields.io/codecov/c/github/zkboys/egg-route-decorator.svg?style=flat-square
 
-[codecov-url]: https://codecov.io/github/fyl080801/egg-route-decorator?branch=master
+[codecov-url]: https://codecov.io/github/zkboys/egg-route-decorator?branch=master
 
-[david-image]: https://img.shields.io/david/fyl080801/egg-route-decorator.svg?style=flat-square
+[david-image]: https://img.shields.io/david/zkboys/egg-route-decorator.svg?style=flat-square
 
-[david-url]: https://david-dm.org/fyl080801/egg-route-decorator
+[david-url]: https://david-dm.org/zkboys/egg-route-decorator
 
 [snyk-image]: https://snyk.io/test/npm/egg-route-decorator/badge.svg?style=flat-square
 
