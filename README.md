@@ -1,9 +1,7 @@
 # egg-route-decorator
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
 [![Test coverage][codecov-image]][codecov-url]
-[![David deps][david-image]][david-url]
 [![Known Vulnerabilities][snyk-image]][snyk-url]
 [![npm download][download-image]][download-url]
 
@@ -11,17 +9,9 @@
 
 [npm-url]: https://npmjs.org/package/egg-route-decorator
 
-[travis-image]: https://img.shields.io/travis/zkboys/egg-route-decorator.svg?style=flat-square
-
-[travis-url]: https://travis-ci.org/zkboys/egg-route-decorator.svg?branch=master
-
 [codecov-image]: https://img.shields.io/codecov/c/github/zkboys/egg-route-decorator.svg?style=flat-square
 
 [codecov-url]: https://codecov.io/github/zkboys/egg-route-decorator?branch=master
-
-[david-image]: https://img.shields.io/david/zkboys/egg-route-decorator.svg?style=flat-square
-
-[david-url]: https://david-dm.org/zkboys/egg-route-decorator
 
 [snyk-image]: https://snyk.io/test/npm/egg-route-decorator/badge.svg?style=flat-square
 
