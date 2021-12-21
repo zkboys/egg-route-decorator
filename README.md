@@ -92,6 +92,7 @@ exports.routeDecorator = {
 | middleware(middleware, index) | class 或 method | middleware：中间件函数；index：中间件顺序 | class级别给所有的方法添加中间件，method级别给当前方法添加中间件 |
 | get(path, name)、post、put、del、patch、all | method | path：路由地址；name：路由名称 | 给方法添加具体http方法的装饰器 |
 | routeIgnore | method | - | 标记当前方法不处理成路由 |
+| validate | class 或 method | options：校验规则：{query: {name: {required: true, message: '姓名必填'}}}，默认校验body： {name: {required: true, message: '姓名必填'}}，可以对四种数据来源进行校验：headers params query body| 检验中间件，需要项目使用 egg-validator-async插件，规则参考：https://github.com/yiminghe/async-validator |
 
 ## 使用场景
 
