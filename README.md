@@ -88,10 +88,9 @@ exports.routeDecorator = {
 
 | 装饰器 | 级别 | 参数 | 说明 |
 | --- | --- | --- | --- |
-| route(prefix?) | class | prefix：所有当前类路由的统一前缀，默认空 | 当前controller类启用装饰器路由，没有使用装饰器的方法，会默认处理为路由，规则：`post /prefix/methodName` |
+| route(prefix?) | class | prefix：所有当前类路由的统一前缀，默认空 | 当前controller类启用装饰器路由 |
 | middleware(middleware, index) | class 或 method | middleware：中间件函数；index：中间件顺序 | class级别给所有的方法添加中间件，method级别给当前方法添加中间件 |
 | get(path, name)、post、put、del、patch、all | method | path：路由地址；name：路由名称 | 给方法添加具体http方法的装饰器 |
-| routeIgnore | method | - | 标记当前方法不处理成路由 |
 | validate | class 或 method | options：校验规则：{query: {name: {required: true, message: '姓名必填'}}}，默认校验body： {name: {required: true, message: '姓名必填'}}，可以对四种数据来源进行校验：headers params query body| 检验中间件，需要项目使用 egg-validator-async插件，规则参考：https://github.com/yiminghe/async-validator |
 
 ## 使用场景
@@ -111,8 +110,7 @@ import {
     put,
     patch,
     del,
-    middleware,
-    routeIgnore
+    middleware
 } from 'egg-route-decorator'
 
 const mi = name => (_ctx, next) => {
@@ -170,13 +168,6 @@ export default class RoleController extends Controller {
     public async roles() {
         throw Error('测试错误 role');
     }
-
-    @middleware(mi('delRoles'))
-    @routeIgnore // 忽略，不生成路由
-    public async delRoles() {
-        return '删除角色22';
-    }
-
 }
 
 ```
