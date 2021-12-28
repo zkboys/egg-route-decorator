@@ -7,9 +7,9 @@ const { route, get, post } = require('../../../../../../lib')
 class HomeController extends Controller {
     @get('/')
     async index() {
-        const { app, ctx } = this
-
-        ctx.body = 'hi, ' + app.plugins.routeDecorator.name
+        const { app } = this
+        // ctx.body = 'hi, ' + app.plugins.routeDecorator.name
+        return app.plugins.routeDecorator.name
     }
 
     @post('/')
