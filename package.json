@@ -6,6 +6,7 @@
     "name": "routeDecorator"
   },
   "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "keywords": [
     "egg",
     "eggPlugin",
