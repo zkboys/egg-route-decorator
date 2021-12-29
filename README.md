@@ -172,6 +172,32 @@ export default class RoleController extends Controller {
 
 ```
 
+## response 支持的写法
+
+```js
+export default class UserController extends Controller {
+    @response(Boolean) // Number String
+    @response(userModel.responseModel)
+    @response({ description: 'ok', schema: userModel.responseModel })
+    @response([userModel.responseModel])
+    @response('操作成功，返回true') // { description: '操作成功，返回true', schema: null }
+    @response({
+        count: { name: '总条数', type: 'number' },
+        rows: {
+            name: '当前页记录',
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: userModel.responseModel,
+            },
+        },
+    })
+    async index() {
+        // ...
+    }
+}
+```
+
 ## License
 
 [MIT](LICENSE)
