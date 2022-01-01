@@ -1,25 +1,25 @@
-# egg-route-decorator
+# @zkboys/egg-route-decorator
 
 [![NPM version][npm-image]][npm-url]
 [![Test coverage][codecov-image]][codecov-url]
 [![Known Vulnerabilities][snyk-image]][snyk-url]
 [![npm download][download-image]][download-url]
 
-[npm-image]: https://img.shields.io/npm/v/egg-route-decorator.svg?style=flat-square
+[npm-image]: https://img.shields.io/npm/v/@zkboys/egg-route-decorator.svg?style=flat-square
 
-[npm-url]: https://npmjs.org/package/egg-route-decorator
+[npm-url]: https://npmjs.org/package/@zkboys/egg-route-decorator
 
 [codecov-image]: https://img.shields.io/codecov/c/github/zkboys/egg-route-decorator.svg?style=flat-square
 
 [codecov-url]: https://codecov.io/github/zkboys/egg-route-decorator?branch=master
 
-[snyk-image]: https://snyk.io/test/npm/egg-route-decorator/badge.svg?style=flat-square
+[snyk-image]: https://snyk.io/test/npm/@zkboys/egg-route-decorator/badge.svg?style=flat-square
 
-[snyk-url]: https://snyk.io/test/npm/egg-route-decorator
+[snyk-url]: https://snyk.io/test/npm/@zkboys/egg-route-decorator
 
 [download-image]: https://img.shields.io/npm/dm/egg-route-decorator.svg?style=flat-square
 
-[download-url]: https://npmjs.org/package/egg-route-decorator
+[download-url]: https://npmjs.org/package/@zkboys/egg-route-decorator
 
 使用装饰器来定义 egg.js 的路由和中间件
 
@@ -27,7 +27,7 @@
 
 ### 依赖的 egg 版本
 
-| egg-route-decorator 版本 | egg  |
+| @zkboys/egg-route-decorator 版本 | egg  |
 | ------------------------- | ------- |
 | 2.x                       | 2.x    |
 
@@ -37,7 +37,7 @@
 // config/plugin.js
 exports.routeDecorator = {
     enable: true,
-    package: 'egg-route-decorator'
+    package: '@zkboys/egg-route-decorator'
 }
 ```
 
@@ -111,7 +111,7 @@ import {
     patch,
     del,
     middleware
-} from 'egg-route-decorator'
+} from '@zkboys/egg-route-decorator'
 
 const mi = name => (_ctx, next) => {
     console.log('passed  middleware ' + name);
