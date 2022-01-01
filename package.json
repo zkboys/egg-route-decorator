@@ -1,6 +1,6 @@
 {
   "name": "@zkboys/egg-route-decorator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Define egg.js router and middleware use decorator",
   "eggPlugin": {
     "name": "routeDecorator"
