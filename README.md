@@ -21,15 +21,7 @@
 
 [download-url]: https://npmjs.org/package/@zkboys/egg-route-decorator
 
-使用装饰器来定义 egg.js 的路由和中间件
-
-## 依赖说明
-
-### 依赖的 egg 版本
-
-| @zkboys/egg-route-decorator 版本 | egg  |
-| ------------------------- | ------- |
-| 2.x                       | 2.x    |
+使用装饰器来定义 egg.js 的路由、中间件、校验、swagger文档等
 
 ## 开启插件
 
@@ -59,10 +51,10 @@ exports.routeDecorator = {
 
 ```javascript
 exports.routeDecorator = {
-    prefix: '/api', // 全局统一前缀
-    defaultMethod: 'get', // 默认请求方法
-    // wrapperResult: false, // 是否包装结果
-    wrapperResult: { // 如下配置是默认值
+    prefix: '/api',             // 全局统一前缀
+    defaultMethod: 'get',       // 默认请求方法
+    // wrapperResult: false,    // 是否包装结果
+    wrapperResult: {            // 如下配置是默认值
         success(data, ctx) {
             // 函数有返回值，进行包装，如果没有返回值，不包装
             if (data !== undefined) {
@@ -86,12 +78,13 @@ exports.routeDecorator = {
 
 ## API
 
-| 装饰器 | 级别 | 参数 | 说明 |
-| --- | --- | --- | --- |
-| route(prefix?) | class | prefix：所有当前类路由的统一前缀，默认空 | 当前controller类启用装饰器路由 |
-| middleware(middleware, index) | class 或 method | middleware：中间件函数；index：中间件顺序 | class级别给所有的方法添加中间件，method级别给当前方法添加中间件 |
-| get(path, name)、post、put、del、patch、all | method | path：路由地址；name：路由名称 | 给方法添加具体http方法的装饰器 |
-| validate | class 或 method | options：校验规则：{query: {name: {required: true, message: '姓名必填'}}}，默认校验body： {name: {required: true, message: '姓名必填'}}，可以对四种数据来源进行校验：headers params query body| 检验中间件，需要项目使用 egg-validator-async插件，规则参考：https://github.com/yiminghe/async-validator |
+| 装饰器                                          | 级别             | 参数                                                     | 说明                                                                                  |
+|----------------------------------------------|----------------|--------------------------------------------------------|-------------------------------------------------------------------------------------|
+| route(prefix?)                               | class          | prefix：所有当前类路由的统一前缀，默认空                                | 当前controller类启用装饰器路由                                                                |
+| middleware(middleware, index)                | class 或 method | middleware：中间件函数；index：中间件顺序                           | class级别给所有的方法添加中间件，method级别给当前方法添加中间件                                               |
+| get(path, name)、post、put、del、patch、all       | method         | path：路由地址；name：路由名称                                    | 给方法添加具体http方法的装饰器                                                                   |
+| header、param、path、query、body                 | class 或 method | options：校验规则：{name: {required: true, message: '姓名必填'}} | 检验中间件，需要项目使用 egg-validator-async插件，规则参考：https://github.com/yiminghe/async-validator |
+| deprecated、description、response、summary、tags | class 或 method | swagger相关                                              | swagger相关                                                                           |
 
 ## 使用场景
 
