@@ -66,14 +66,5 @@
   "ci": {
     "version": "12,14"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fyl080801/egg-decorator-router.git"
-  },
-  "bugs": {
-    "url": "https://github.com/fyl080801/egg-decorator-router/issues"
-  },
-  "homepage": "https://github.com/fyl080801/egg-decorator-router#readme",
-  "author": "fyl080801",
   "license": "MIT"
 }
